@@ -14,6 +14,10 @@
 9. Abstracted network interface
 10. Choose your own adventure
 11. Packet Server
+12. Multiple clients (threaded)
+13. Unified network access (threaded)
+14. Multiple clients (select)
+15. Simple peer-to-peer example
 
 ## Descriptions
 
@@ -121,6 +125,54 @@ network code base in the read and write functions - though the changes are the s
 
 Run order: Server.py, Client.py
 
+### Multiple clients (threaded)
+This example takes the previous code base and implements the capability for the server to handle multiple clients at
+once using a separate threaded handler for each client (read thread, write thread) making it very inefficient as there
+is a large thread overhead. 
+
+Run order: Server.py, Client.py
+
+### Unified network access (threaded)
+This example takes the previous code base and unifies the connection handling for the server and client into a single
+class (`ConnectionHandler.py`) with an interface placed on top of this to manage the creation of listeners and direct
+socket connections (`NetworkInterface.py`). By merging this common code we can begin to abstract the network away and 
+begin to work with the system as a message passing interface.
+
+Run order: Server.py, Client.py
+
+### Multiple clients (select)
+This example modifies the previous code base to utilise a `select` based model allowing a single thread to handle
+reading and writing to all connected entities. Each listener is still created as a separate thread to minimise the
+potential confusion over handling multiple incoming connections with a single handler function. You should consider
+altering the code base to move this functionality into the `ConnectionHandler` so that the `NetworkInterface` can have
+reduced knowledge of the network improving the layering of our system.
+
+Run order: Server.py, Client.py
+
+### Simple peer-to-peer example
+This example creates a single `node` which starts two services - one with echo functionality, and one with dictionary 
+functionality. These two simple blocks of functionality show how you can easily add new functions to a node on the
+network. At current each of these creates a thread to handle each new client connected to the service - though it would 
+be relatively simple to alter this to allow one thread per service, or to allow multiple services to be called from 
+one processing thread.
+
+The example starts the dictionary on port 50001, and the echo on port 50002 (specified port +1)
+
+When connected to the echo functionality all input is echoed back to the client.
+
+When connected to the dictionary functionality the following functionality is available:
+> get `word`, returns the desription of the entered word
+> 
+> put `word` `description`, adds the word and associated description to the dictionary
+> 
+> write, writes the current dictionary to disk using a `pickle` dump.
+> 
+> read, loads the dictionary from disk (note: a dictionary must be present)
+
+
+Run order: Server.py
+
+
 ## Notes
 
 > #### Import
@@ -144,3 +196,11 @@ Run order: Server.py, Client.py
 > 
 >The socket is referenced with the name s, AF_INET means an IP based socket, SOCK_STREAM
 > means a TCP (stream based) socket.
+
+> #### Stream based networking
+
+> #### Threads
+
+> #### Selectors
+
+> #### GUIs
