@@ -145,35 +145,5 @@ if __name__ == "__main__":
         wordy.append(D)
 
     print(wordy)
-    #M = hashlib.md5(message.encode()).hexdigest()
-
-    #M = int(M[:5], 16)  # We need the length of the message to be less than the key length, normally we would
-    # divide this into blocks
-    #print(M)
-    # Signature is created by Alice
-    #S = (M ** d) % n
-
-    # Alice sends M and S both to Bob
-    # Bob generates message M1 using the
-    # signature S, Alice's public key e
-    # and product n.
-    # M1 = (S ** e) % n
-    # decrypted = M1
-    # print(decrypted)
-    # # If M = M1 only then Bob accepts
-    # # the message sent by Alice.
-    #
-    # if M == M1:
-    #     print("As M = M1, Accept the\
-    #             message sent by Alice")
-    # else:
-    #     print("As M not equal to M1,\
-    #             Do not accept the message\
-    #             sent by Alice ")
-
-    # M = hashlib.md5(message.encode()).hexdigest()
-    #
-    # M = int(M[:5], 16)  # We need the length of the message to be less than the key length, normally we would
-    # # divide this into blocks
-
+   
 
