@@ -18,6 +18,12 @@
 13. Unified network access (threaded)
 14. Multiple clients (select)
 15. Simple peer-to-peer example
+16. Simple GUI
+17. Networked GUI
+18. Simple Cipher
+19. Symmetric Key Exhange (Diffie-Hellman)
+20. Negotiation
+21. Textbook RSA
 
 ## Descriptions
 
@@ -172,6 +178,52 @@ When connected to the dictionary functionality the following functionality is av
 
 Run order: Server.py
 
+### Simple GUI
+You will need to have wxPython installed, `pip install wxPython` will handle this on a machine that you manage.
+
+This programme demonstrates a simple wxPython GUI application showcasing the use of panels, sizers, and other graphical
+components that you may wish to use. It has very limited functionality. [RealPython](https://realpython.com/python-gui-with-wxpython/) 
+has a good tutorial on this library.
+
+
+Run order: wxGui.py
+
+### Networked GUI
+This example modifies the simple GUI example to integrate with the simple peer-to-peer node that we created previously. 
+It makes use of events to create GUI elements within the application and show data. 
+>N.B. this example is currently in development and may not function fully correctly. The Server 
+> will accept messages from itself and displays them in one tab, additional connections do not currently
+> generate additional tabs.
+
+Run order: wxGUI.py
+
+### Simple Cipher
+These example are simple transpositional ciphers - a Caesar cipher (constant shift of x places around the alphabet), and
+a Vigenère cipher which uses a code word to provide `length(code word)` shifts within the ciphered phrase.
+
+Run order: caesar.py
+Run order: vigneresquare.py
+
+### Symmetric Key Exchange (Diffie-Hellman)
+This example demonstrates the mathematics underlying a Diffie-Hellman key exchange process.
+The example makes use of ephemeral keys so provides forward-security but no authentication. 
+
+Run order: DH.py
+
+### Negotiation
+This example shows how you could integrate a Diffie-Hellman key exchange into your networked application to generate a 
+set of keys that can be used to feed an encryption algorithm. The example uses the Diffie-Hellman ephemeral keys to
+create a code word (using the `num2words` library) which feeds a Vigenère cipher.
+
+Renegotiation is not carried out at all during this process.
+
+
+Run order: NegotiationServer.py, NegotiationClient.py
+
+### Textbook RSA
+This example implements the textbook version of the RSA algorithm for encryption and digital signatures.
+
+Run order: SimpleRSA.py
 
 ## Notes
 
@@ -200,6 +252,9 @@ Run order: Server.py
 > #### Stream based networking
 
 > #### Threads
+> 
+
+> #### Thread Safety
 
 > #### Selectors
 

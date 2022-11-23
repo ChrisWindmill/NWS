@@ -2,10 +2,8 @@ import wx
 
 
 class TextPanel(wx.Panel):
-    def __init__(self, parent, connection):
+    def __init__(self, parent):
         wx.Panel.__init__(self, parent)
-
-        self.connection=connection
 
         self.label = wx.StaticText(self, label="Text window", size=(400, 330))
         self.text_ctrl = wx.TextCtrl(self)
