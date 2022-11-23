@@ -141,7 +141,7 @@ class functionality_handler:
 
 class abstractServer:
     def __init__(self, host="127.0.0.1", port=50000):
-        self.listener = Listener(self.client_handler,host, port)
+        self.listener = Listener(self.client_handler, host, port)
         self.connections = []
         self.count = 0
 
