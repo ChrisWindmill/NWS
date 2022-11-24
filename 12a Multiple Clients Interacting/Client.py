@@ -15,7 +15,17 @@ class abstractClient:
         while self.running:
             message = self.client.getMessage()
             if message:
-                print(message)
+                if message.startswith("REDIRECT"):
+                    components = message.split(" ")
+                    print(f"Redirect received, open connection to: {components[1]}:{components[2]}")
+                elif message.startswith("ERROR"):
+                    components = message.split(" ")
+                    if components[1] == "SERVICE":
+                        print(f"Error received with {components[1]}: code: {components[2]}")
+                    elif components[1] == "INVALID_COMMAND":
+                        print(f"invalid command received from connected service")
+                else:
+                    print(f"Service returned: {message}")
 
     def process(self):
         # Start the UI thread and start the network components
