@@ -225,6 +225,35 @@ This example implements the textbook version of the RSA algorithm for encryption
 
 Run order: SimpleRSA.py
 
+### Transferring a file
+This example implements the a simple file transfer using chunked data (300 byte blocks). The file is recreated on the
+client side of the connection and can then be used normally. If you have VLC currently installed you can use `PLAY <filename>`
+to hear audio files. The transfer uses a Base64 encoding of the file chunks so that the string message passing we have 
+implemented previously can be utilised.
+
+> Note: When transferring audio files default windows media players will not play the file until it has been moved from
+> the directiory - the file is valid but throws an error. The VLC playback option will work.
+
+
+> #### Commands:
+> `FILELIST` returns a list of all files in the current directory (by default `files` of the server)
+> 
+> `GET <filename>` attempts to transfer the given filename, will return chunks of 300 bytes until the file is fully
+> transfered if the file is present or an error otherwise.
+> 
+> `PLAY <filename>` if VLC is installed this will attempt to play the provided media file. Note - this has no error
+> checking and VLC will likely throw a large number of "errors" from stale caching of mods.
+ 
+
+Run order: Server.py, Client.py
+
+### Simple heartbeat example
+This example implements a simple heartbeat that allows you to determine if a connection has timed out, and how many such 
+events have occurred. A second client is provided (`AutoPingClient.py`) that runs a background thread to maintain an 
+active connection if the user has not sent a message in the last 4 seconds.
+
+Run order: Server.py, Client.py, AutoPingClient.py
+
 ## Notes
 
 > #### Import
